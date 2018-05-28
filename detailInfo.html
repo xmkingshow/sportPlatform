@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/kefuiconfont.css" rel="stylesheet" />
+		<link href="css/pinglunIconfont.css" rel="stylesheet" />
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav public-color" style="height: 60px;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;font-size:20px;padding-top: 32px;">返回</a>
+			<h1 class="mui-title" style="color: #FFFFFF;font-size:20px;padding-top: 18px;">守护女神</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded box-top-b">
+				<!--
+            	顶部icon部分
+            -->
+				<div id="headerInfo" class="box-all">
+
+				</div>
+				<!--
+            	游戏介绍部分
+            	-->
+				<div class="box-all" style="background-color: #FFFFFF;">
+					<div class="box-middle-b">
+						<span>游戏介绍</span>
+					</div>
+					<div class="box-middle-b">
+						<span id="gameIntroduce"></span>
+					</div>
+
+				</div>
+				<!--
+                	滚动宣传图
+                -->
+				<div class="mui-slider">
+					<div id="gamePics" class="mui-slider-group" style="text-align: left;width: 25%;">
+						<div id="pic1" class="mui-slider-item">
+
+						</div>
+						<div id="pic2" class="mui-slider-item">
+
+						</div>
+						<div id="pic3" class="mui-slider-item">
+
+						</div>
+						<div id="pic4" class="mui-slider-item">
+
+						</div>
+						<div id="pic5" class="mui-slider-item">
+
+						</div>
+					</div>
+				</div>
+				<!--
+            	游戏评论部分
+            	-->
+				<div class="box-bottom-b box-all">
+					<p class="box-bottom-b-p">/玩家点评/</p>
+					<div id="disContent">
+					</div>
+					<div class="box-bottom-b-p-bb">
+
+					</div>
+
+				</div>
+
+			</div>
+			<footer>
+				<div class="footer-left">
+					<i id='msg-image' class="mui-icon iconfontkefu icon-kefu1-copy" style="font-size: 32px;color: #12CDB0;"></i>
+				</div>
+				<div class="footer-center">
+					<button id="btnStart" type="button" class="mui-btn footer-center-button" style="padding-top: 4px;">开始</button>
+				</div>
+				<div>
+					<label for="" class="footer-right">
+				<i id='msg-type'  class="mui-icon iconfontkefu icon-dianping-copy1-copy-copy-copy" style="font-size: 32px;color: #12CDB0;"></i>
+				</label>
+				</div>
+
+			</footer>
+			<script src="js/mui.min.js"></script>
+			<script src="js/net.js"></script>
+			<script type="text/javascript">
+				mui.init();
+				mui.plusReady(function() {
+					var detailData = plus.webview.currentWebview();
+					if(mui.os.ios) {
+						plus.navigator.setFullscreen(true);
+					}
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none',
+					});
+
+					var headerInfo = mui('#headerInfo');
+					var innerHTML = "<div class='box-top-b-l'><img src='" + detailData.icon2 + "' /></div><div class='box-top-b-m'><p class='box-top-b-m-p1'>" + detailData.gameName + "</p>";
+
+					var gamekeys = detailData.gamekeys;
+					var keysArr = gamekeys.split(',');
+					var i = 0;
+					var size = keysArr.length;
+					if(size > 0) {
+						innerHTML += "<p>";
+					}
+					for(; i < size; i++) {
+						innerHTML += "<a class='box-top-b-m-p3'>" + keysArr[i] + "</a>";
+					}
+					if(size > 0) {
+						innerHTML += "</p>";
+					}
+					innerHTML += "<p class='box-top-b-m-p2'>" + detailData.oneWorlds + "</p></div>";
+					headerInfo[0].innerHTML = innerHTML;
+					var gameIntroduce = mui('#gameIntroduce');
+					gameIntroduce[0].innerHTML = detailData.introduce;
+					innerHTML = null;
+					var pic1 = mui("#pic1");
+					pic1[0].innerHTML = "<img src='" + detailData.pic1 + "' style='border-radius: 10px; width: 95%; margin: 10px 5px 0px 0px;' />";
+					var pic2 = mui("#pic2");
+					pic2[0].innerHTML = "<img src='" + detailData.pic2 + "' style='border-radius: 10px; width: 95%; margin: 10px 5px 0px 0px;' />";
+					var pic3 = mui("#pic3");
+					pic3[0].innerHTML = "<img src='" + detailData.pic3 + "' style='border-radius: 10px; width: 95%; margin: 10px 5px 0px 0px;' />";
+					var pic4 = mui("#pic4");
+					pic4[0].innerHTML = "<img src='" + detailData.pic4 + "' style='border-radius: 10px; width: 95%; margin: 10px 5px 0px 0px;' />";
+					var pic5 = mui("#pic5");
+					pic5[0].innerHTML = "<img src='" + detailData.pic5 + "' style='border-radius: 10px; width: 95%; margin: 10px 5px 0px 0px;' />";
+
+					mui("#gamePics").on('tap', '.mui-slider-item', function() {
+						mui.openWindow({
+							url: 'picBig.html',
+							id: 'picBig.html',
+							extras: {
+								'pic1': detailData.pic1,
+								'pic2': detailData.pic2,
+								'pic3': detailData.pic3,
+								'pic4': detailData.pic4,
+								'pic5': detailData.pic5
+							}
+						});
+					});
+					getAllComment(detailData.gameId);
+
+					mui('.footer-right').on('tap', 'i', function(e) {
+
+						mui.openWindow({
+							url: 'discuss.html',
+							id: 'discuss',
+							extras: {
+								'gameId': detailData.gameId
+							}
+						});
+
+					});
+
+					wait(1);
+
+				});
+
+				function wait(t) {
+					var i = setInterval(function() {
+
+						if(t > 0) {
+							t--;
+
+						} else {
+
+							window.clearInterval(i);
+							var currentView = plus.webview.currentWebview();
+							currentView.show('slide-in-right', 300);
+							plus.nativeUI.closeWaiting();
+						}
+					}, 1000);
+				}
+
+				document.getElementById("btnStart").addEventListener('tap', function(e) {
+//					mui.openWindow("game.html");
+					//					mui.openWindow({url:'game.html',id:'game'});
+										mui.toast("即将开放，敬请期待！");
+				});
+
+				function getAllComment(gameId) {
+
+					mui.post(surl + commentInfoEvent, {
+						'gameId': gameId
+					}, function(data) {
+
+						var cms = data.cms;
+						size = cms.length;
+						i = 0;
+						var tempData = null;
+						var disTime = null;
+						var time = 0;
+						innerHTML = "";
+						for(; i < size; i++) {
+							tempData = cms[i];
+
+							time = tempData.time;
+							if(time < MIN_5) {
+								disTime = "5分钟内";
+							} else if(time < MIN_30) {
+								disTime = "30分钟内";
+							} else if(time < MIN_60) {
+								disTime = "1小时内";
+							} else if(time < DAY_1 && time > MIN_60) {
+								disTime = Math.floor(time / MIN_60) + "小时前";
+							} else {
+								disTime = Math.floor(time / DAY_1) + "天前";
+							}
+							innerHTML += "<div class='box-bottom-b-l'><div class='box-bottom-b-l-l'><img src='" + tempData.header + "' /></div><div class='box-bottom-b-l-l-m'><p class='box-bottom-b-l-l-m-p1'>" + tempData.nick +
+								"</p></div><div class='box-bottom-b-l-l-m-p2'><p>" +
+								tempData.content + "</p></div></div><div  class='box-bottom-b-l-l-m-b'><div class='box-bottom-b-l-l-m-b-p'><p style='font-size: 16px;'>" +
+								disTime + "</p></div><div class='box-bottom-b-l-l-m-b-p-zan'><a data-name=" + tempData.id + "><div id='zan_" + tempData.id + "'  class='box-bottom-b-l-l-m-b-p mui-icon iconfont icon-dianping_zan'>" +
+								tempData.good + "</div></a></div><div class='box-bottom-b-l-l-m-b-p-cha'><a data-name=" + tempData.id + "><div id='cha_" + tempData.id + "' class='box-bottom-b-l-l-m-b-p mui-icon iconfont icon-dianping_cha'>" +
+								tempData.bad + "</div></a></div><div class='box-bottom-b-l-l-m-b-p-replay'><a data-name=" + tempData.id + "><div class='box-bottom-b-l-l-m-b-p mui-icon iconfont icon-pinglun'></div></a></div></div>";
+
+						}
+						var disContent = mui("#disContent");
+						disContent[0].innerHTML = innerHTML;
+						var id = 0;
+						if(size > 0) {
+							mui('.box-bottom-b-l-l-m-b-p-zan').on('tap', 'a', function(e) {
+								id = this.getAttribute('data-name');
+								mui.post(surl + commentGoodEvent, {
+									id: id
+								}, function(data) {
+									if(data.c == 0) {
+										mui(('#zan_' + id))[0].innerHTML = data.g;
+									}
+								});
+							});
+
+							mui('.box-bottom-b-l-l-m-b-p-cha').on('tap', 'a', function(e) {
+								id = this.getAttribute('data-name');
+								mui.post(surl + commentBadEvent, {
+									id: id
+								}, function(data) {
+									if(data.c == 0) {
+										mui(('#cha_' + id))[0].innerHTML = data.b;
+									}
+								});
+							});
+							mui('.box-bottom-b-l-l-m-b-p-replay').on('tap', 'a', function(e) {
+
+							});
+						}
+
+					});
+//					mui.preload({
+//						url: 'game.html',
+//						id: 'game.html',
+//						styles: {
+//							hardwareAccelerated: true
+//						}
+//					});
+				}
+
+				window.addEventListener('update', function(e) {
+
+					getAllComment(e.detail);
+
+				}, false);
+			</script>
+	</body>
+
+</html>

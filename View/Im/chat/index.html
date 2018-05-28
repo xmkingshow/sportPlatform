@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	</head>
+
+	<body onresize="refreshBottomView()">
+		<div id="rerr" class="mui-content mui-scroll-wrapper chat-box" style="background: #edeef1;">
+			<div class="mui-scroll">
+
+				<!--<div class="chat-trip pastMessage">
+					<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+				</div>-->
+
+				<!--<div class="chat-trip">无更多历史消息</div>-->
+
+				<div class="bubbleDiv">
+					<div class="chat-trip">
+						<div class="mui-pull-loading mui-icon mui-spinner mui-visibility"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div id='sound-alert' class="rprogress">
+			<div id="times" class="times">0</div>
+			<div class="rschedule"></div>
+			<div class="r-sigh">!</div>
+			<div id="audio_tips" class="rsalert">手指上滑，取消发送</div>
+		</div>
+		<footer>
+			<div class="tabBar1 tabBar">  
+				<div id='msg-sound'>
+					<span class='iconfont icon-yuyin'></span>
+				</div>
+			</div>
+			<div class="tabBar2 tabBar item">
+				<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div id="selectImage" class="mui-scroll"></div>
+				</div>
+				<div class="navbtn">
+					<span class="mui-btn mui-select-gallerys">相册</span>
+					<span class="mui-btn mui-btn-send">发送</span>
+				</div>
+			</div>
+			<div class="tabBar3 tabBar">
+
+			</div>
+			<div class="tabBar4 tabBar">
+
+				<div id="Gallery" class="mui-slider">
+					<div class="mui-slider-group">
+						<div class="mui-slider-item">
+							<ul class="mui-table-view mui-grid-view mui-grid-9 mui-icon-1"></ul>
+						</div>
+						<div class="mui-slider-item">
+							<ul class="mui-table-view mui-grid-view mui-grid-9 mui-icon-2"></ul>
+						</div>
+					</div>
+					<div class="mui-slider-indicator">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>
+
+			</div>
+			<div class="tabBar5 tabBar">
+
+			</div>
+		</footer>
+
+		<!--基础库-->
+		<link rel="stylesheet" href="../../../css/mui.min.css" />
+		<link rel="stylesheet" href="../../../fonts/iconfont.css" />
+		<script type="text/javascript" src="../../../js/mui.min.js"></script>
+
+		<!--图片操作预览-->
+		<link rel="stylesheet" href="../../../js/ImageHelper/Upimg.css" />
+		<script type="text/javascript" src="../../../js/ImageHelper/mui.zoom.js"></script>
+		<script type="text/javascript" src="../../../js/ImageHelper/mui.previewimage.span.js"></script>
+		<script type="text/javascript" src="../../../js/ImageHelper/Project.UpImg.js"></script>
+
+		<!--原生控件及样式-->
+		<link rel="stylesheet" href="../../../css/ImViewHelper.css" />
+		<script type="text/javascript" src="../../../js/viewHelper.js"></script>
+		<script type="text/javascript" src="../../../js/ImViewHelper.js"></script>
+		<script type="text/javascript" src="../../../js/iScrollHelper.js"></script>
+		<script type="text/javascript" src="chat.js"></script>
+
+		<script type="text/javascript" src="../../../bll/itool.js" data-bll="itool.store" data-main="index.js"></script>
+
+	</body>
+
+</html>

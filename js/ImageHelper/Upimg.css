@@ -1,0 +1,233 @@
+.image-list {
+	width: 100%;
+	background-size: cover;
+	float: left;
+}
+
+.image-list .image-up {
+	height: 0;
+	width: 23%;
+	border-radius: 10px;
+	color: #ccc;
+	display: inline-block;
+	text-align: center;
+	margin: 3px 0 3px 1%;
+	background: #F7F7F7;
+	background-size: cover !important;
+	background-position: center !important;
+}
+
+.image-list .image-up i {
+	width: 100%;
+	font-size: 43px;
+	position: relative;
+}
+
+.image-list .image-up i::after {
+	content: '照片/视频';
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 40px;
+	left: 0px;
+}
+
+.image-list .up-list-row {
+	height: 0;
+	width: 23%;
+	padding-bottom: 23%;
+	background-size: cover;
+	background-position: center;
+	float: left;
+	border-radius: 10px;
+	margin: 3px 1%;
+	background-image: url(../Images/Banner/bannera.png);
+	transition: all 0.6s;
+}
+
+
+/*图片内容*/
+
+.mui-slider-img-content {
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 99;
+	word-wrap:break-word;
+	line-height: 25px;
+	padding: 9px;
+}
+
+
+/*删除按钮*/
+.mui-slider-img-delete{
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 2em 1.5em;
+	z-index: 99;
+}
+.mui-slider-img-delete .icon-shanchu {
+	font-size: 30px !important;
+	color: white;
+}
+
+
+
+
+
+.mui-preview-image.mui-fullscreen {
+  position: fixed;
+  z-index: 20;
+  background-color: #000;
+}
+.mui-preview-footer,
+.mui-preview-header {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 10;
+}
+.mui-preview-header {
+  height: 44px;
+  top: 16px;
+}
+.mui-preview-footer {
+  height: 50px;
+  bottom: 0;
+}
+.mui-preview-header .mui-preview-indicator {
+  display: block;
+  line-height: 25px;
+  color: #fff;
+  text-align: center;
+  margin: 15px auto 4;
+  width: 70px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 16px;
+  margin: 0 auto;
+}
+.mui-preview-image {
+  display: none;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.mui-preview-image.mui-preview-in {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+.mui-preview-image.mui-preview-out {
+  background: none;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+.mui-preview-image.mui-preview-out .mui-preview-footer,
+.mui-preview-image.mui-preview-out .mui-preview-header {
+  display: none;
+}
+.mui-zoom-scroller {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-backface-visibility: hidden;
+}
+.mui-zoom {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+.mui-slider .mui-slider-group .mui-slider-item img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+  width: 100%;
+}
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+  display: inline-table;
+}
+.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+  display: table-cell;
+  vertical-align: middle;
+}
+.mui-preview-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.mui-preview-loading.mui-active {
+  display: block;
+}
+.mui-preview-loading .mui-spinner-white {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -25px;
+  height: 50px;
+  width: 50px;
+}
+.mui-preview-image img.mui-transitioning {
+  -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+@-webkit-keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@keyframes fadeIn {
+				0% {
+					opacity: 0;
+				}
+				100% {
+					opacity: 1;
+				}
+			}
+			@-webkit-keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			@keyframes fadeOut {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			p img {
+				max-width: 100%;
+				height: auto;
+			}

@@ -1,0 +1,77 @@
+.mui-bar-tab {
+	height: 88px;
+	box-shadow: none;
+	background: #edeef1;
+}
+
+.mui-bar-tab .sendInput {
+	width: 96%;
+	height: 38px;
+	margin-left: 2%;
+	padding: 0px 5px;
+	border: white;
+}
+
+.mui-bar-tab .iconnav {
+	height: 40px;
+	width: 96%;
+	margin-left: 2%;
+}
+
+.mui-bar-tab .iconnav ul {
+	padding: 3px 0 0 0;
+	margin: 0;
+	width: 100%;
+	list-style: none;
+}
+
+.mui-bar-tab .iconnav ul li {
+	float: left;
+	width: 20%;
+	text-align: center;
+	color: #6b6b6b;
+}
+
+.mui-icon-arrowthinup{
+	font-weight: bold;
+}
+
+.mui-bar-tab .iconnav .iconfont {
+	font-size: 24px;
+}
+
+.mui-btn-green {
+	border: 1px solid #2ac845;
+	background-color: #2ac845;
+}
+
+.mui-footer-nav {
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	overflow: hidden;
+}
+
+#msg-send {
+	width: 48px;
+	height: 38px;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	right: 6px;
+	top: -2px;
+	text-align: center;
+}
+#msg-send .mui-btn{
+	border-radius:50%;
+	padding: 0;
+	margin: 0;
+	width: 28px;
+	color: white;
+	font-weight: bold;
+}
+
+.mui-icon-arrowthinup{
+	font-size: 19px !important;
+}

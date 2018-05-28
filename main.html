@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/iconfont.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/swiper.min.css" rel="stylesheet" />
+	</head>
+
+	<body class="box-all">
+		<header class="mui-bar mui-bar-nav public-color" style="height: 60px;">
+			<h1 class="mui-title" style="color: #FFFFFF;padding-top: 18px;">游戏大厅</h1>
+		</header>
+		<div class="mui-content box-all">
+			<div id="slider" class="mui-slider public-padding">
+				<div class="mui-slider">
+					<div id="headerBanner" class="mui-slider-group mui-slider-loop">
+
+					</div>
+				</div>
+			</div>
+			<div class="box-l">
+				<ul id="gameList" class="mui-table-view">
+				</ul>
+			</div>
+			<nav class="mui-bar mui-bar-tab">
+				<a id="gameHome" class="mui-tab-item mui-active">
+					<span class="mui-icon iconfont icon-youxi"></span>
+					<span class="mui-tab-label">游戏</span>
+				</a>
+				<a id="chat" class="mui-tab-item">
+					<span class="mui-icon iconfont icon-liaotian"></span>
+					<span class="mui-tab-label">聊天</span>
+				</a>
+				<a id="person" class="mui-tab-item">
+					<span class="mui-icon iconfont icon-geren"></span>
+					<span class="mui-tab-label">我的</span>
+				</a>
+			</nav>
+		</div>
+		<script src="js/net.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+
+			mui.plusReady(function() {
+				
+				var innerHTML = '';
+				var tempData = null;
+				var i = 0;
+				mui.getJSON(surl + mainEvent, null, function(vData) {
+					
+					//顶部banner start...........
+					var broads = vData.bd;
+					var size = broads.length;
+					if(size > 0) {
+						var headerBanner = mui("#headerBanner");
+						innerHTML = "<div class='mui-slider-item mui-slider-item-duplicate'  style='text-align: center;'><a  href='#'><img src='" + broads[size - 1] + "' style='border-radius: 15px; width: 98%; margin: 0 auto;' /></a></div>";
+
+						for(; i < size; i++) {
+							tempData = broads[i];
+							if(tempData != null) {
+								innerHTML += "<div class='mui-slider-item' style='text-align: center;'><a  href='#'><img src='" + tempData + "' style='border-radius: 15px;width: 98%;margin: 0 auto'  /></a></div>";
+							}
+						}
+						innerHTML += "<div class='mui-slider-item mui-slider-item-duplicate' style='text-align: center;'><a href='#'><img src='" + broads[0] + "' style='border-radius: 15px; width: 98%;margin: 0 auto' /></a></div>";
+
+						headerBanner[0].innerHTML = innerHTML;
+
+					}
+
+					//end......
+					var gameInfo = vData.gi;
+					size = gameInfo.length;
+
+					if(size > 0) {
+
+						var gameList = mui("#gameList");
+						i = 0;
+
+						for(; i < size; i++) {
+							tempData = gameInfo[i];
+							innerHTML = "<li id='" + tempData.id + "'><p class='box-l-p'>" + tempData.title + "</p>";
+							innerHTML += "<div class='box-l-i'><img src='" + tempData.banner + "' /></div>";
+							innerHTML += "<div class='box-l-b'><div class='box-l-b-l'><img src='" + tempData.icon + "'/></div><div class='box-l-b-m'><p class='box-l-b-m-p1'>" + tempData.gameName + "</p><p class='box-l-b-m-p2'>" + tempData.oneWorlds + "</p></div><div class='box-l-b-r mui-icon mui-icon-arrowright' style='color: #AAAAAA;'></div></li>";
+
+						}
+						gameList[0].innerHTML = innerHTML;
+
+						gameList.on('tap', 'li', function() {
+							var gameId = this.getAttribute('id');
+							i = 0;
+							tempData = null;
+							for(; i < size; i++) {
+								tempData = gameInfo[i];
+								if(tempData.id == gameId) {
+
+									break;
+								}
+							}
+							if(tempData != null) {
+								var nwaiting = plus.nativeUI.showWaiting(); 
+								plus.webview.create('detailInfo.html','detailInfo',{},tempData); 
+							}
+
+						});
+
+					}
+
+				}); //end getJSON
+				document.getElementById("chat").addEventListener('tap',function(){
+					 localStorage.setItem("status","1");
+					 plus.webview.getWebviewById('imChat').show();
+					
+					 plus.webview.getWebviewById('pcenter').hide();
+					 plus.webview.getWebviewById('main').hide();
+				});
+			  
+				document.getElementById("person").addEventListener('tap',function(){
+					 var id= localStorage.getItem("id");
+					
+					 if(id){
+					 	plus.webview.getWebviewById('pcenter').show();
+					 	plus.webview.getWebviewById('main').hide();
+					 	plus.webview.getWebviewById('imChat').hide();
+//					 	mui.openWindow({
+//							url: 'pcenter.html',
+//							id: 'pcenter'
+//						});
+
+					 }else {
+					 	mui.openWindow({url:'login.html',id:'login'});
+					 }	
+				});
+			  
+
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+
+				document.querySelector('.mui-slider').addEventListener('slider', function(event) {
+					//注意slideNumber是从0开始的；
+
+				});
+			});
+		</script>
+	</body>
+
+</html>

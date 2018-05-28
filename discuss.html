@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="feedback">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/feedback.css" />
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav public-color" style="height: 60px;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;font-size:20px;padding-top: 32px;"></a>
+			<button id="submit" class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" style="margin-top: 20px; color: #FFFFFF;">发送</button>
+		</header>
+		<div class="mui-content mui-content-padded">
+			<div class="row mui-input-row">
+				<textarea id='question' class="mui-input-clear question" placeholder="(原创)发表对游戏的深刻看法和认识，有意思的经理体验和小故事，即可获得大量平台币！15-500字。" style="margin-top: 20px;"></textarea>
+			</div>
+			<!--<p>图片(大小1M以下)</p>
+			<div id='image-list' class="row image-list"></div>-->
+
+		</div>
+		<script src="./js/mui.min.js"></script>
+		<script src="js/net.js"></script>
+		<!--<script src=" ./js/feedback.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				
+
+				var submit = document.getElementById('submit');
+			
+				submit.addEventListener('tap', function(event) {
+					plus.nativeUI.showWaiting();
+					
+					var closeInfo = plus.webview.getWebviewById('main');
+
+					var id = localStorage.getItem("id");
+					var question = document.getElementById('question');
+					if(question.value==null || question.value.trim().length==0){
+						mui.toast("不能发送空信息!");
+						return;
+					}
+					
+					mui.post(surl + commentSaveEvent, {
+						uid: id,
+						gameId: vdata.gameId,
+						content: question.value
+					}, function(data) {
+			
+						if(data.c == 0) {
+							var detailInfo = plus.webview.getWebviewById('detailInfo');
+							mui.fire(detailInfo, 'update', vdata.gameId);
+							
+							plus.navigator.setFullscreen(false);
+							plus.webview.currentWebview().close();
+						}
+					});
+						
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

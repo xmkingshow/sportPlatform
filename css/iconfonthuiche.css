@@ -1,0 +1,16 @@
+
+@font-face {font-family: "iconfont";
+  src: url('../fonts/iconfonthuiche.ttf?t=1526804269278') format('truetype'); 
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:28px;
+  font-style:normal;
+  color: #12cdb0 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-huiche:before { content: "\e615"; }
+

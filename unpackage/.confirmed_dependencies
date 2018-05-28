@@ -1,0 +1,23 @@
+{
+  "main.html": {
+    "refer": [
+      "login.html",
+      "detailInfo.html"
+    ],
+    "resources": []
+  },
+  "index.html": {
+    "refer": [
+      "main.html",
+      "imChat.html",
+      "pcenter.html"
+    ],
+    "resources": []
+  },
+  "pcenter.html": {
+    "refer": [
+      "changeNick.html"
+    ],
+    "resources": []
+  }
+}

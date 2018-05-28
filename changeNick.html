@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/style.css" rel="stylesheet" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group {
+				margin-top: 10px;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group label {
+				width: 22%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			.link-area {
+				display: block;
+				margin-top: 25px;
+				text-align: center;
+			}
+			
+			.spliter {
+				color: #bbb;
+				padding: 0px 8px;
+			}
+			
+			.oauth-area {
+				position: absolute;
+				bottom: 20px;
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background-size: 30px 30px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd;
+				border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active {
+				border: solid 1px #aaa;
+			}
+			
+			.oauth-area .oauth-btn.disabled {
+				background-color: #ddd;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav public-color" style="height: 60px;">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="color: #FFFFFF;font-size:20px;padding-top: 32px;"></a>
+			<h1 class="mui-title" style="color: #FFFFFF;padding-top: 18px;">修改昵称</h1>
+		</header>
+		<div class="mui-content" style="margin-top: 20px;">
+			<form id='login-form' class="mui-input-group">
+				<div class="mui-input-row">
+					<label>昵称</label>
+					<input id='nick' type="text" class="mui-input-clear mui-input" placeholder="请输昵称">
+				</div>
+			</form>
+
+			<div class="mui-content-padded">
+				<button id='change' class="mui-btn mui-btn-block regedit-button">修改</button>
+			</div>
+			<div class="mui-content-padded oauth-area">
+
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.enterfocus.js"></script>
+		<script src="js/net.js"></script>
+		<script>
+			(function($, doc) {
+				$.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				$.plusReady(function() {
+//					plus.screen.lockOrientation("portrait-primary");
+
+					doc.getElementById("change").addEventListener('tap', function(e) {
+						var nick = doc.getElementById('nick');
+						if(nick.value == "" || nick.value.trim().length == 0) {
+							mui.toast("昵称不能为空");
+							return;
+						}
+						var id = localStorage.getItem("id");
+						if(id == null || id == undefined) {
+							mui.toast("请先登陆!");
+							return;
+						}
+//						plus.nativeUI.showWaiting();
+						mui.post(surl + modifyNickEvent, {
+							nick: nick.value,
+							id: id
+						}, function(data) {
+							if(data.c == 0) {
+								mui.toast("修改成功!");
+								var pcenter = plus.webview.getWebviewById('pcenter');
+								mui.fire(pcenter, 'update', nick.value);
+								localStorage.setItem("nick",nick.value);
+								plus.navigator.setFullscreen(false);
+								plus.webview.currentWebview().close();
+
+							} else if(data.c == 1) {
+								mui.toast("昵称不能为空!");
+							} else {
+								mui.toast("请先登陆!");
+							}
+
+						});
+
+					});
+				
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

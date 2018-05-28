@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+
+				mui.preload({
+					url: 'main.html',
+					id: 'main'
+				});
+				
+				var mainWebview = plus.webview.create(
+					'main.html',
+					'main'
+				);
+				
+				var chatWebview = plus.webview.create(
+					'imChat.html',
+					'imChat'
+				);
+				chatWebview.hide();
+
+				var centerWebview = plus.webview.create(
+					'pcenter.html',
+					'pcenter'
+				);
+				centerWebview.hide();
+				mainWebview.show();
+			});
+		</script>
+	</body>
+
+</html>
