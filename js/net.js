@@ -1,4 +1,4 @@
-const surl="http://laptop-avrje8l8:8080/GamePlatformService/";
+const surl="http://127.0.0.1:8080/GamePlatformService/";
 const chatUrl="http://laptop-avrje8l8:9026";
 const regeditEvent="countinfo/regedit";
 const loginEvent="countinfo/login";
